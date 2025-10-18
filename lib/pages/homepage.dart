@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import './pokemonlist.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -22,7 +22,10 @@ class HomePage extends StatelessWidget {
             height: 60,
             child: ElevatedButton(
               onPressed: () {
-                
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => PokemonList()),
+                );
               },
               style: ButtonStyle(
                 backgroundColor: WidgetStatePropertyAll(Colors.red),
