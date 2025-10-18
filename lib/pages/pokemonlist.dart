@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import './pokemoncard.dart';
 
 class PokemonList extends StatefulWidget {
   const PokemonList({super.key});
@@ -51,22 +52,32 @@ class _PokemonListState extends State<PokemonList> {
               itemCount: _pokemons.length,
               itemBuilder: (context, index) {
                 final pokemon = _pokemons[index];
-                return Container(
-                  decoration: BoxDecoration(
-                    border: Border.fromBorderSide(
-                      BorderSide(color: Colors.black),
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: const Color.fromARGB(255, 255, 164, 162),
-                  ),
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (context) => PokemonCard(pokemon: pokemon,),
+                      ),
+                    );
+                  },
 
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.network(pokemon['sprites']['front_default']),
-                        Text(pokemon['name']),
-                      ],
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.fromBorderSide(
+                        BorderSide(color: Colors.black),
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      color: const Color.fromARGB(255, 255, 164, 162),
+                    ),
+                  
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.network(pokemon['sprites']['front_default']),
+                          Text(pokemon['name']),
+                        ],
+                      ),
                     ),
                   ),
                 );
