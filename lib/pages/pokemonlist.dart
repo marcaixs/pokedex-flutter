@@ -12,6 +12,7 @@ class PokemonList extends StatefulWidget {
 class _PokemonListState extends State<PokemonList> {
 
   List _pokemons = [];
+  bool loading = true;
 
   @override
   void initState() {
@@ -21,8 +22,9 @@ class _PokemonListState extends State<PokemonList> {
 
   void fetchPokemons() async{
     List pokemons = [];
+    
 
-    for (var i = 1; i <= 10; i++) {
+    for (var i = 1; i <= 151; i++) {
       final response = await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/$i'));
       final data = jsonDecode(response.body);
       print(data['name']);
@@ -31,13 +33,14 @@ class _PokemonListState extends State<PokemonList> {
     }
      setState(() {
         _pokemons = pokemons;
+        loading = false;
       });
   }
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      body: ListView.builder(
+      body: loading ? Center(child: CircularProgressIndicator(),) : ListView.builder(
         itemCount: _pokemons.length,
         itemBuilder: (context, index){
           final pokemon = _pokemons[index];
