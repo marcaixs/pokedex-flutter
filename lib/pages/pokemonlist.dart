@@ -40,6 +40,10 @@ class _PokemonListState extends State<PokemonList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Pokedex'),
+        backgroundColor: Colors.red,
+      ),
       body: loading
           ? Center(child: CircularProgressIndicator())
           : GridView.builder(
